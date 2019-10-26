@@ -1,9 +1,9 @@
-﻿using AceleraDev.Domain.Interfaces.Repositories;
+﻿using AceleraDev.Data.Repositories.Base;
+using AceleraDev.Domain.Interfaces.Repositories;
 using AceleraDev.Domain.Models;
-using AceleraDev.Domain.Repositories.Base;
 using System.Collections.Generic;
 
-namespace AceleraDev.Domain.Repositories
+namespace AceleraDev.Data.Repositories
 {
     public class ClienteRepository : RepositoryBase<Cliente>, IClienteRepository
     {

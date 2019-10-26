@@ -2,13 +2,17 @@
 using AceleraDev.Domain.Models.Base;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AceleraDev.Domain.Services.Base
 {
     public class ServiceBase<TModel> : IServiceBase<TModel> where TModel : ModelBase
     {
         protected IRepositoryBase<TModel> _repositoryBase;
+
+        public ServiceBase(IRepositoryBase<TModel> repositoryBase)
+        {
+            _repositoryBase = repositoryBase;
+        }
 
         public void Add(TModel obj)
         {
