@@ -13,5 +13,6 @@ namespace AceleraDev.Application.Interfaces
         ClienteViewModel GetById(Guid id);
         IList<ClienteViewModel> GetAll();
         IList<ClienteViewModel> Find(Func<Cliente, bool> predicate);
+        IEnumerable<ClienteViewModel> BuscarTop10();
     }
 }

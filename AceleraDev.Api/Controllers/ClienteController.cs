@@ -2,6 +2,7 @@
 using AceleraDev.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AceleraDev.Api.Controllers
 {
@@ -20,8 +21,14 @@ namespace AceleraDev.Api.Controllers
         [HttpGet]
         public IEnumerable<ClienteViewModel> Get()
         {
-            _clienteAppService.Add(new ClienteViewModel { Nome = "TAC" });
-            return _clienteAppService.GetAll();
+            //_clienteAppService.Add(new ClienteViewModel { Nome = "TAC" });
+
+            //var data = _clienteAppService.Find(p => p.Nome == "TAC").FirstOrDefault();
+            //data.Nome = "Atualziado";
+
+            //_clienteAppService.Update(data);
+
+            return _clienteAppService.BuscarTop10();
         }
 
     }

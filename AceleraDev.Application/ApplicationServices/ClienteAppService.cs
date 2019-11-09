@@ -31,6 +31,12 @@ namespace AceleraDev.Application.ApplicationServices
             _clienteService.Add(modelCliente);
         }
 
+        public IEnumerable<ClienteViewModel> BuscarTop10()
+        {
+            var modelClientes = _clienteService.BuscarTop10();
+            return _mapper.Map<List<ClienteViewModel>>(modelClientes);
+        }
+
         public IList<ClienteViewModel> Find(Func<Cliente, bool> predicate)
         {
             var modelClientes = _clienteService.Find(predicate);

@@ -1,27 +1,21 @@
-﻿using AceleraDev.Data.Repositories.Base;
+﻿using AceleraDev.Data.Context;
+using AceleraDev.Data.Repositories.Base;
 using AceleraDev.Domain.Interfaces.Repositories;
 using AceleraDev.Domain.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AceleraDev.Data.Repositories
 {
     public class ClienteRepository : RepositoryBase<Cliente>, IClienteRepository
     {
-        public ClienteRepository()
+        public ClienteRepository(AceleraDevContext context): base(context)
         {
-            base._mock = new List<Cliente> {
-                new Cliente
-                {
-                    Nome = "Thiago",
-                    Sobrenome = "Cordeiro",
-                    Cpf = "070.044.555.77"
-                }
-            };
         }
 
         public List<Cliente> BuscarTop10()
         {
-            throw new System.NotImplementedException();
+            return _context.Clientes.Where(p => p.Ativo).Take(10).ToList();
         }
     }
 }

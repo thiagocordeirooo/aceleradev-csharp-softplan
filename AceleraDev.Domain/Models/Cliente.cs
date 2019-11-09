@@ -11,7 +11,7 @@ namespace AceleraDev.Domain.Models
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public DateTime? DataNascimento { get; set; }
-        public List<string> Telefones { get; set; }
+        public string Telefone { get; set; }
         public List<Endereco> Enderecos { get; set; }
 
         public bool Valido()

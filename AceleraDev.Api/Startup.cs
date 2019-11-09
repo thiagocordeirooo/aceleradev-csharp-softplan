@@ -1,8 +1,10 @@
 using AceleraDev.Application.Mapping;
 using AceleraDev.CrossCutting.IoC;
+using AceleraDev.Data.Context;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,6 +32,9 @@ namespace AceleraDev.Api
             // Configuração do AutoMapper
             services.AddAutoMapper(typeof(AutoMappingDomainToViewModel));
             services.AddAutoMapper(typeof(AutoMappingViewModelToDomain));
+
+            // Configuração do contexto ef
+            services.AddDbContext<AceleraDevContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
