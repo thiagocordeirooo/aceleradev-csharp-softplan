@@ -12,7 +12,7 @@ namespace AceleraDev.Domain.Models
         public string Sobrenome { get; set; }
         public DateTime? DataNascimento { get; set; }
         public string Telefone { get; set; }
-        public List<Endereco> Enderecos { get; set; }
+        public virtual List<Endereco> Enderecos { get; set; }
 
         public bool Valido()
         {

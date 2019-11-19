@@ -9,6 +9,7 @@ namespace AceleraDev.Application.Mapping
         public AutoMappingDomainToViewModel()
         {
             CreateMap<Cliente, ClienteViewModel>();
+            CreateMap<Endereco, EnderecoViewModel>();
         }
     }
 }

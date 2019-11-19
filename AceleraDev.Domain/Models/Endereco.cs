@@ -1,4 +1,5 @@
 ﻿using AceleraDev.Domain.Models.Base;
+using System;
 
 namespace AceleraDev.Domain.Models
 {
@@ -9,5 +10,7 @@ namespace AceleraDev.Domain.Models
         public int Numero { get; set; }
         public string Bairro { get; set; }
         public string Complemento { get; set; }
+        public Guid ClienteId { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

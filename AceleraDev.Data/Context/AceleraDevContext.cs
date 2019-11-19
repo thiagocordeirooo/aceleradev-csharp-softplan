@@ -1,13 +1,17 @@
 ﻿using AceleraDev.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 
 namespace AceleraDev.Data.Context
 {
     public class AceleraDevContext : DbContext
     {
-        public AceleraDevContext(DbContextOptions options) : base(options)
+        private readonly IConfiguration _configuration;
+
+        public AceleraDevContext(DbContextOptions options, IConfiguration configuration) : base(options)
         {
+            _configuration = configuration;
         }
 
         public DbSet<Cliente> Clientes { get; set; }
@@ -15,6 +19,13 @@ namespace AceleraDev.Data.Context
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<PedidoItem> PedidosItens { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseLazyLoadingProxies();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +46,11 @@ namespace AceleraDev.Data.Context
 
 
             modelBuilder.Entity<Cliente>().HasData(new Cliente { Nome = "Thiago" });
+        }
+
+        internal string GetConnectionString()
+        {
+            return _configuration.GetConnectionString("DefaultConnection");
         }
     }
 }

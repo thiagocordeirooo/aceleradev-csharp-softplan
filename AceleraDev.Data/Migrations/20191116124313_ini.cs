@@ -15,7 +15,7 @@ namespace AceleraDev.Data.Migrations
                     CriadoEm = table.Column<DateTime>(nullable: false),
                     AtualizadoEm = table.Column<DateTime>(nullable: false),
                     Ativo = table.Column<bool>(nullable: false),
-                    Cpf = table.Column<string>(maxLength: 11, nullable: true),
+                    Cpf = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: true),
                     Nome = table.Column<string>(maxLength: 255, nullable: true),
                     Sobrenome = table.Column<string>(maxLength: 255, nullable: true),
                     DataNascimento = table.Column<DateTime>(nullable: true),
@@ -96,7 +96,8 @@ namespace AceleraDev.Data.Migrations
                 {
                     PedidoId = table.Column<Guid>(nullable: false),
                     ProdutoId = table.Column<Guid>(nullable: false),
-                    Quantidade = table.Column<int>(nullable: false)
+                    Quantidade = table.Column<int>(nullable: false),
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18, 4)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,7 +119,7 @@ namespace AceleraDev.Data.Migrations
             migrationBuilder.InsertData(
                 table: "cliente",
                 columns: new[] { "Id", "Ativo", "AtualizadoEm", "Cpf", "CriadoEm", "DataNascimento", "Nome", "Sobrenome", "Telefone" },
-                values: new object[] { new Guid("df5ab8a7-24ca-4368-99d8-473e12a7b36b"), true, new DateTime(2019, 11, 9, 14, 18, 59, 36, DateTimeKind.Local).AddTicks(675), null, new DateTime(2019, 11, 9, 14, 18, 59, 36, DateTimeKind.Local).AddTicks(675), null, "Thiago", null, null });
+                values: new object[] { new Guid("68c41759-a206-4e37-83ec-3a8b76aaa8f5"), true, new DateTime(2019, 11, 16, 9, 43, 13, 338, DateTimeKind.Local).AddTicks(6231), null, new DateTime(2019, 11, 16, 9, 43, 13, 338, DateTimeKind.Local).AddTicks(6231), null, "Thiago", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_endereco_ClienteId",

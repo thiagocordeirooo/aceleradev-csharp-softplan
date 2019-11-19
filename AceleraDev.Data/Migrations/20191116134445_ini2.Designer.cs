@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AceleraDev.Data.Migrations
 {
     [DbContext(typeof(AceleraDevContext))]
-    [Migration("20191109171859_ini")]
-    partial class ini
+    [Migration("20191116134445_ini2")]
+    partial class ini2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace AceleraDev.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Cpf")
-                        .HasColumnType("nvarchar(11)")
+                        .HasColumnType("varchar(11)")
                         .HasMaxLength(11);
 
                     b.Property<DateTime>("CriadoEm")
@@ -62,10 +62,10 @@ namespace AceleraDev.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("df5ab8a7-24ca-4368-99d8-473e12a7b36b"),
+                            Id = new Guid("821d64a7-66bc-44d0-9273-d733d1dfb7e4"),
                             Ativo = true,
-                            AtualizadoEm = new DateTime(2019, 11, 9, 14, 18, 59, 36, DateTimeKind.Local).AddTicks(675),
-                            CriadoEm = new DateTime(2019, 11, 9, 14, 18, 59, 36, DateTimeKind.Local).AddTicks(675),
+                            AtualizadoEm = new DateTime(2019, 11, 16, 10, 44, 45, 465, DateTimeKind.Local).AddTicks(5866),
+                            CriadoEm = new DateTime(2019, 11, 16, 10, 44, 45, 465, DateTimeKind.Local).AddTicks(5866),
                             Nome = "Thiago"
                         });
                 });
@@ -90,7 +90,7 @@ namespace AceleraDev.Data.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<Guid?>("ClienteId")
+                    b.Property<Guid>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Complemento")
@@ -145,13 +145,18 @@ namespace AceleraDev.Data.Migrations
             modelBuilder.Entity("AceleraDev.Domain.Models.PedidoItem", b =>
                 {
                     b.Property<Guid>("PedidoId")
+                        .HasColumnName("PedidoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProdutoId")
+                        .HasColumnName("ProdutoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("ValorUnitario")
+                        .HasColumnType("decimal(18, 4)");
 
                     b.HasKey("PedidoId", "ProdutoId");
 
@@ -189,9 +194,11 @@ namespace AceleraDev.Data.Migrations
 
             modelBuilder.Entity("AceleraDev.Domain.Models.Endereco", b =>
                 {
-                    b.HasOne("AceleraDev.Domain.Models.Cliente", null)
+                    b.HasOne("AceleraDev.Domain.Models.Cliente", "Cliente")
                         .WithMany("Enderecos")
-                        .HasForeignKey("ClienteId");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AceleraDev.Domain.Models.Pedido", b =>

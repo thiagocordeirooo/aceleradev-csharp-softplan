@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AceleraDev.Data.Migrations
 {
     [DbContext(typeof(AceleraDevContext))]
-    [Migration("20191109192711_add_valor_pedido_item")]
-    partial class add_valor_pedido_item
+    [Migration("20191116124313_ini")]
+    partial class ini
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace AceleraDev.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Cpf")
-                        .HasColumnType("nvarchar(11)")
+                        .HasColumnType("varchar(11)")
                         .HasMaxLength(11);
 
                     b.Property<DateTime>("CriadoEm")
@@ -62,10 +62,10 @@ namespace AceleraDev.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b5819144-e118-4e03-8424-495a1283ecea"),
+                            Id = new Guid("68c41759-a206-4e37-83ec-3a8b76aaa8f5"),
                             Ativo = true,
-                            AtualizadoEm = new DateTime(2019, 11, 9, 16, 27, 11, 363, DateTimeKind.Local).AddTicks(7797),
-                            CriadoEm = new DateTime(2019, 11, 9, 16, 27, 11, 363, DateTimeKind.Local).AddTicks(7797),
+                            AtualizadoEm = new DateTime(2019, 11, 16, 9, 43, 13, 338, DateTimeKind.Local).AddTicks(6231),
+                            CriadoEm = new DateTime(2019, 11, 16, 9, 43, 13, 338, DateTimeKind.Local).AddTicks(6231),
                             Nome = "Thiago"
                         });
                 });
@@ -145,9 +145,11 @@ namespace AceleraDev.Data.Migrations
             modelBuilder.Entity("AceleraDev.Domain.Models.PedidoItem", b =>
                 {
                     b.Property<Guid>("PedidoId")
+                        .HasColumnName("PedidoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProdutoId")
+                        .HasColumnName("ProdutoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantidade")

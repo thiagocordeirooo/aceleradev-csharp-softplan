@@ -13,6 +13,8 @@ namespace AceleraDev.Data.Configs
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Cpf).HasMaxLength(11).HasColumnType("varchar(11)");
+
+            builder.HasMany(p => p.Enderecos).WithOne(p => p.Cliente).HasForeignKey(p => p.ClienteId);
         }
     }
 }

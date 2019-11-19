@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace AceleraDev.Api
 {
@@ -24,7 +25,10 @@ namespace AceleraDev.Api
         // Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                // Desabilitar referência circular na serialiazção dos json
+                .AddNewtonsoftJson(opt =>
+                    opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             // Configuração da injeção de dependencias
             RegisterIoC.Register(services);
@@ -35,6 +39,9 @@ namespace AceleraDev.Api
 
             // Configuração do contexto ef
             services.AddDbContext<AceleraDevContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Configuração do mongodb
+            MongoDbContext.ConnectionString = Configuration.GetConnectionString("mongodb");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

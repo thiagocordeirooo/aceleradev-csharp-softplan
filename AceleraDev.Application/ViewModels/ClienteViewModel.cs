@@ -5,7 +5,7 @@ namespace AceleraDev.Application.ViewModels
 {
     public class ClienteViewModel
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public DateTime CriadoEm { get; set; }
         public DateTime AtualizadoEm { get; set; }
         public bool Ativo { get; set; }
@@ -13,6 +13,8 @@ namespace AceleraDev.Application.ViewModels
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public DateTime? DataNascimento { get; set; }
-        public List<string> Telefones { get; set; }
+        public string Telefone { get; set; }
+
+        public List<EnderecoViewModel> Enderecos { get; set; }
     }
 }

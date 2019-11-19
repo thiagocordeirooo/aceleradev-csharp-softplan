@@ -11,6 +11,8 @@ namespace AceleraDev.Data.Configs
             builder.ToTable("endereco");
             
             builder.HasKey(p => p.Id);
+
+            builder.HasOne(p => p.Cliente).WithMany(p => p.Enderecos).HasForeignKey(p => p.ClienteId);
         }
     }
 }
