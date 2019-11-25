@@ -14,9 +14,9 @@ namespace AceleraDev.Domain.Services.Base
             _repositoryBase = repositoryBase;
         }
 
-        public void Add(TModel obj)
+        public TModel Add(TModel obj)
         {
-            _repositoryBase.Add(obj);
+            return _repositoryBase.Add(obj);
         }
 
         public IList<TModel> Find(Func<TModel, bool> predicate)

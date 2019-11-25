@@ -19,7 +19,7 @@ namespace AceleraDev.Application.ApplicationServices
             _mapper = mapper;
         }
 
-        public void Add(ClienteViewModel clienteViewModel)
+        public ClienteViewModel Add(ClienteViewModel clienteViewModel)
         {
             //var cliente = new Cliente
             //{
@@ -28,7 +28,9 @@ namespace AceleraDev.Application.ApplicationServices
             //};
 
             var modelCliente = _mapper.Map<Cliente>(clienteViewModel);
-            _clienteService.Add(modelCliente);
+            modelCliente = _clienteService.Add(modelCliente);
+
+            return _mapper.Map<ClienteViewModel>(modelCliente);
         }
 
         public IEnumerable<ClienteViewModel> BuscarTop10()

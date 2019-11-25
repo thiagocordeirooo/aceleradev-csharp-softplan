@@ -22,7 +22,7 @@ namespace AceleraDev.Data.Repositories.Base
             _mongoDbContext = new MongoDbContext();
         }
 
-        public void Add(TModel obj)
+        public TModel Add(TModel obj)
         {
             obj.Id = Guid.NewGuid();
             obj.CriadoEm = obj.AtualizadoEm = DateTime.Now;
@@ -32,6 +32,8 @@ namespace AceleraDev.Data.Repositories.Base
             _context.SaveChanges();
 
             InserirAuditoria("Add", obj.Id.Value);
+
+            return obj;
         }
 
         public IList<TModel> Find(Func<TModel, bool> predicate)
@@ -98,7 +100,7 @@ namespace AceleraDev.Data.Repositories.Base
                     EntidadeId = entidadeId.ToString()
                 };
 
-                _mongoDbContext.Auditorias.InsertOne(auditoria);
+                //_mongoDbContext.Auditorias.InsertOne(auditoria);
             });
         }
     }

@@ -7,7 +7,7 @@ namespace AceleraDev.Application.Interfaces
 {
     public interface IClienteAppService
     {
-        void Add(ClienteViewModel obj);
+        ClienteViewModel Add(ClienteViewModel obj);
         void Update(ClienteViewModel obj);
         void Remove(Guid id);
         ClienteViewModel GetById(Guid id);
