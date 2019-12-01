@@ -21,7 +21,7 @@ namespace AceleraDev.Data.Migrations
 
             modelBuilder.Entity("AceleraDev.Domain.Models.Cliente", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -56,21 +56,11 @@ namespace AceleraDev.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("cliente");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("821d64a7-66bc-44d0-9273-d733d1dfb7e4"),
-                            Ativo = true,
-                            AtualizadoEm = new DateTime(2019, 11, 16, 10, 44, 45, 465, DateTimeKind.Local).AddTicks(5866),
-                            CriadoEm = new DateTime(2019, 11, 16, 10, 44, 45, 465, DateTimeKind.Local).AddTicks(5866),
-                            Nome = "Thiago"
-                        });
                 });
 
             modelBuilder.Entity("AceleraDev.Domain.Models.Endereco", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -114,7 +104,7 @@ namespace AceleraDev.Data.Migrations
 
             modelBuilder.Entity("AceleraDev.Domain.Models.Pedido", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -165,7 +155,7 @@ namespace AceleraDev.Data.Migrations
 
             modelBuilder.Entity("AceleraDev.Domain.Models.Produto", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -188,6 +178,69 @@ namespace AceleraDev.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("produto");
+                });
+
+            modelBuilder.Entity("AceleraDev.Domain.Models.Usuario", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("AtualizadoEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ac02ad03-98f7-4335-a01e-dd6abbb78633"),
+                            Ativo = false,
+                            AtualizadoEm = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CriadoEm = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "admin@mail.com",
+                            Nome = "Administrador",
+                            Perfil = "ADMIN",
+                            Senha = "81dc9bdb52d04dc20036dbd8313ed055"
+                        },
+                        new
+                        {
+                            Id = new Guid("7b4731bd-5ba0-40ac-a3fe-cd1272f7952e"),
+                            Ativo = false,
+                            AtualizadoEm = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CriadoEm = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vendedor@mail.com",
+                            Nome = "Vendedor",
+                            Perfil = "VENDEDOR",
+                            Senha = "81dc9bdb52d04dc20036dbd8313ed055"
+                        });
                 });
 
             modelBuilder.Entity("AceleraDev.Domain.Models.Endereco", b =>

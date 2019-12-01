@@ -1,20 +1,23 @@
-﻿using AceleraDev.Application.Interfaces;
+﻿using AceleraDev.Api.Controllers.Base;
+using AceleraDev.Application.Interfaces;
 using AceleraDev.Application.ViewModels;
+using AceleraDev.CrossCutting.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace AceleraDev.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ClienteController : ControllerBase
+    public class ClienteController : BaseController
     {
         private readonly IClienteAppService _clienteAppService;
 
-        public ClienteController(IClienteAppService clienteAppService)
+        public ClienteController(IClienteAppService clienteAppService,
+                                 IUsuarioAppService usuarioAppService) : base(usuarioAppService)
         {
             _clienteAppService = clienteAppService;
         }
@@ -24,6 +27,13 @@ namespace AceleraDev.Api.Controllers
         {
             try
             {
+                if (UsuarioTemPerfilAdmin)
+                {
+                    Console.WriteLine("Oi, sou adm ;D");
+                }
+
+                var usuario = UsuarioLogado();
+
                 var clientes = _clienteAppService.GetAll();
                 return Ok(clientes);
             }
@@ -88,6 +98,7 @@ namespace AceleraDev.Api.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = Constants.PERFIL_ADMIN)]
         [HttpDelete("{id}")]
         public ActionResult Delete(Guid id)
         {

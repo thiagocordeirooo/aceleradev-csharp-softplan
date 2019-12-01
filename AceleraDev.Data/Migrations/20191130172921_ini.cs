@@ -43,6 +43,24 @@ namespace AceleraDev.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "usuario",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CriadoEm = table.Column<DateTime>(nullable: false),
+                    AtualizadoEm = table.Column<DateTime>(nullable: false),
+                    Ativo = table.Column<bool>(nullable: false),
+                    Nome = table.Column<string>(maxLength: 255, nullable: true),
+                    Email = table.Column<string>(maxLength: 255, nullable: false),
+                    Senha = table.Column<string>(maxLength: 255, nullable: false),
+                    Perfil = table.Column<string>(maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_usuario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "endereco",
                 columns: table => new
                 {
@@ -55,7 +73,7 @@ namespace AceleraDev.Data.Migrations
                     Numero = table.Column<int>(nullable: false),
                     Bairro = table.Column<string>(maxLength: 255, nullable: true),
                     Complemento = table.Column<string>(maxLength: 255, nullable: true),
-                    ClienteId = table.Column<Guid>(nullable: true)
+                    ClienteId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,7 +83,7 @@ namespace AceleraDev.Data.Migrations
                         column: x => x.ClienteId,
                         principalTable: "cliente",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,9 +135,14 @@ namespace AceleraDev.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "cliente",
-                columns: new[] { "Id", "Ativo", "AtualizadoEm", "Cpf", "CriadoEm", "DataNascimento", "Nome", "Sobrenome", "Telefone" },
-                values: new object[] { new Guid("68c41759-a206-4e37-83ec-3a8b76aaa8f5"), true, new DateTime(2019, 11, 16, 9, 43, 13, 338, DateTimeKind.Local).AddTicks(6231), null, new DateTime(2019, 11, 16, 9, 43, 13, 338, DateTimeKind.Local).AddTicks(6231), null, "Thiago", null, null });
+                table: "usuario",
+                columns: new[] { "Id", "Ativo", "AtualizadoEm", "CriadoEm", "Email", "Nome", "Perfil", "Senha" },
+                values: new object[] { new Guid("ac02ad03-98f7-4335-a01e-dd6abbb78633"), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@mail.com", "Administrador", "ADMIN", "81dc9bdb52d04dc20036dbd8313ed055" });
+
+            migrationBuilder.InsertData(
+                table: "usuario",
+                columns: new[] { "Id", "Ativo", "AtualizadoEm", "CriadoEm", "Email", "Nome", "Perfil", "Senha" },
+                values: new object[] { new Guid("7b4731bd-5ba0-40ac-a3fe-cd1272f7952e"), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vendedor@mail.com", "Vendedor", "VENDEDOR", "81dc9bdb52d04dc20036dbd8313ed055" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_endereco_ClienteId",
@@ -144,6 +167,9 @@ namespace AceleraDev.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "pedido_item");
+
+            migrationBuilder.DropTable(
+                name: "usuario");
 
             migrationBuilder.DropTable(
                 name: "pedido");

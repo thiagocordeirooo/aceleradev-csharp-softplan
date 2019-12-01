@@ -1,4 +1,6 @@
-﻿using AceleraDev.Domain.Models;
+﻿using AceleraDev.CrossCutting.Constants;
+using AceleraDev.CrossCutting.Utils;
+using AceleraDev.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
@@ -19,6 +21,7 @@ namespace AceleraDev.Data.Context
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<PedidoItem> PedidosItens { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,7 +48,8 @@ namespace AceleraDev.Data.Context
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AceleraDevContext).Assembly);
 
 
-            modelBuilder.Entity<Cliente>().HasData(new Cliente { Nome = "Thiago" });
+            modelBuilder.Entity<Usuario>().HasData(new Usuario { Nome = "Administrador", Email = "admin@mail.com", Senha = "1234".ToHashMD5(), Perfil = Constants.PERFIL_ADMIN });
+            modelBuilder.Entity<Usuario>().HasData(new Usuario { Nome = "Vendedor", Email = "vendedor@mail.com", Senha = "1234".ToHashMD5(), Perfil = Constants.PERFIL_VENDEDOR });
         }
 
         internal string GetConnectionString()

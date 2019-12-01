@@ -10,6 +10,7 @@ namespace AceleraDev.Application.Mapping
         {
             CreateMap<Cliente, ClienteViewModel>();
             CreateMap<Endereco, EnderecoViewModel>();
+            CreateMap<Usuario, UsuarioViewModel>();
         }
     }
 }
