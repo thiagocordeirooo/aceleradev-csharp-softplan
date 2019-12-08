@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 namespace AceleraDev.Api.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/cliente")]
     [ApiController]
     public class ClienteController : BaseController
     {
@@ -43,6 +43,11 @@ namespace AceleraDev.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult GetById(Guid id)
         {
@@ -61,6 +66,11 @@ namespace AceleraDev.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}/enderecos")]
         public ActionResult GetEnderecosCliente(Guid id)
         {
@@ -79,6 +89,12 @@ namespace AceleraDev.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="empresa"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Post([FromHeader][Required(ErrorMessage = "Precisa da Empresa no Header.")] string empresa,
             [FromBody]ClienteViewModel cliente)

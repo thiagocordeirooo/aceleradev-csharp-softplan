@@ -4,6 +4,7 @@ using AceleraDev.Application.ViewModels.Autenticacao;
 using AceleraDev.CrossCutting.Helpers;
 using AceleraDev.CrossCutting.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -15,6 +16,9 @@ using System.Text;
 
 namespace AceleraDev.Api.Controllers
 {
+    /// <summary>
+    /// Login do usuário.
+    /// </summary>
     [Route("api/auth")]
     [ApiController]
     public class AutenticacaoController : ControllerBase
@@ -22,14 +26,28 @@ namespace AceleraDev.Api.Controllers
         private readonly IUsuarioAppService _usuarioAppService;
         private readonly AppSettings _appSettings;
 
+        /// <summary>
+        /// Login do usuário ctor.
+        /// </summary>
+        /// <param name="usuarioAppService"></param>
+        /// <param name="appSettings"></param>
         public AutenticacaoController(IUsuarioAppService usuarioAppService, IOptions<AppSettings> appSettings)
         {
             _usuarioAppService = usuarioAppService;
             _appSettings = appSettings.Value;
         }
 
+        /// <summary>
+        /// Endpoint para login do usuário.
+        /// </summary>
+        /// <param name="loginViewModel"></param>
+        /// <returns></returns>
+        /// <response code="200">Retorna o usuário e o token</response>
+        /// <response code="400">Se ocorrer algum erro na autenticação</response>  
         [AllowAnonymous]
         [HttpPost()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult Post(LoginViewModel loginViewModel)
         {
             var usuario = _usuarioAppService.Find(p => p.Email == loginViewModel.Login).FirstOrDefault();
