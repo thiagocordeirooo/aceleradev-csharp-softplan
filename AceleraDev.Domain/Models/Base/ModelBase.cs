@@ -12,6 +12,8 @@ namespace AceleraDev.Domain.Models.Base
         public ModelBase()
         {
             Id = Guid.NewGuid();
+            CriadoEm = AtualizadoEm = DateTime.Now;
+            Ativo = true;
         }
     }
 }

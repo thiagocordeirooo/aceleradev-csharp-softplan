@@ -4,6 +4,7 @@ using AceleraDev.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace AceleraDev.Data.Context
 {
@@ -47,9 +48,8 @@ namespace AceleraDev.Data.Context
             // modelBuilder.ApplyConfiguration(new ClienteConfig());
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AceleraDevContext).Assembly);
 
-
-            modelBuilder.Entity<Usuario>().HasData(new Usuario { Nome = "Administrador", Email = "admin@mail.com", Senha = "1234".ToHashMD5(), Perfil = Constants.PERFIL_ADMIN });
-            modelBuilder.Entity<Usuario>().HasData(new Usuario { Nome = "Vendedor", Email = "vendedor@mail.com", Senha = "1234".ToHashMD5(), Perfil = Constants.PERFIL_VENDEDOR });
+            modelBuilder.Entity<Usuario>().HasData(new Usuario { Nome = "Administrador", Email = "admin@mail.com", Senha = "1234".ToHashMD5(), Perfil = PerfilUsuario.ADMIN });
+            modelBuilder.Entity<Usuario>().HasData(new Usuario { Nome = "Vendedor", Email = "vendedor@mail.com", Senha = "1234".ToHashMD5(), Perfil = PerfilUsuario.VENDEDOR });
         }
 
         internal string GetConnectionString()

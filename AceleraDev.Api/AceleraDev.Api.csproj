@@ -4,10 +4,6 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\aceleraDev\AceleraDev\AceleraDev.Api\AceleraDev.Api.xml</DocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
@@ -19,6 +15,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.0.0-rc4" />
   </ItemGroup>
@@ -26,12 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\AceleraDev.Application\AceleraDev.Application.csproj" />
     <ProjectReference Include="..\AceleraDev.CrossCutting.IoC\AceleraDev.CrossCutting.IoC.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="swagger\swagger-ui.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

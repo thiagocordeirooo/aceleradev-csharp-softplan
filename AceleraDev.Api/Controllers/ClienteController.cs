@@ -5,10 +5,14 @@ using AceleraDev.CrossCutting.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AceleraDev.Api.Controllers
 {
+    /// <summary>
+    /// Endpoint de Cliente
+    /// </summary>
     [Authorize]
     [Route("api/cliente")]
     [ApiController]
@@ -16,23 +20,24 @@ namespace AceleraDev.Api.Controllers
     {
         private readonly IClienteAppService _clienteAppService;
 
-        public ClienteController(IClienteAppService clienteAppService,
-                                 IUsuarioAppService usuarioAppService) : base(usuarioAppService)
+        public ClienteController(IClienteAppService clienteAppService)
         {
             _clienteAppService = clienteAppService;
         }
 
+        /// <summary>
+        /// Busca todos os clientes.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult Get()
+        public ActionResult<List<ClienteViewModel>> Get()
         {
             try
             {
-                if (UsuarioTemPerfilAdmin)
+                if (TemPerfilAdmin)
                 {
-                    Console.WriteLine("Oi, sou adm ;D");
+                    var usuario = UsuarioLogado();
                 }
-
-                var usuario = UsuarioLogado();
 
                 var clientes = _clienteAppService.GetAll();
                 return Ok(clientes);
@@ -44,12 +49,12 @@ namespace AceleraDev.Api.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Busca um cLiente por id.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>ClienteViewModel</returns>
         [HttpGet("{id}")]
-        public ActionResult GetById(Guid id)
+        public ActionResult<ClienteViewModel> GetById(Guid id)
         {
             try
             {
@@ -66,11 +71,6 @@ namespace AceleraDev.Api.Controllers
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}/enderecos")]
         public ActionResult GetEnderecosCliente(Guid id)
         {
@@ -89,12 +89,6 @@ namespace AceleraDev.Api.Controllers
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="empresa"></param>
-        /// <param name="cliente"></param>
-        /// <returns></returns>
         [HttpPost]
         public ActionResult Post([FromHeader][Required(ErrorMessage = "Precisa da Empresa no Header.")] string empresa,
             [FromBody]ClienteViewModel cliente)
@@ -114,8 +108,8 @@ namespace AceleraDev.Api.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = Constants.PERFIL_ADMIN)]
         [HttpDelete("{id}")]
+        [Authorize(Roles = PerfilUsuario.ADMIN)]
         public ActionResult Delete(Guid id)
         {
             try

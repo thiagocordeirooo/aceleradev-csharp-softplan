@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace AceleraDev.Application.ViewModels
@@ -15,7 +13,7 @@ namespace AceleraDev.Application.ViewModels
         public string Nome { get; set; }
         public string Email { get; set; }
 
-        [IgnoreDataMember] // by @francisco
+        [JsonIgnore]
         public string Senha { get; set; }
         public string Perfil { get; set; }
 

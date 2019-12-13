@@ -3,15 +3,17 @@ using System;
 using AceleraDev.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AceleraDev.Data.Migrations
 {
     [DbContext(typeof(AceleraDevContext))]
-    partial class AceleraDevContextModelSnapshot : ModelSnapshot
+    [Migration("20191208154555_ini-pg")]
+    partial class inipg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,4 +1,5 @@
 ﻿using AceleraDev.Application.ViewModels;
+using AceleraDev.Application.ViewModels.Seguranca;
 using AceleraDev.Domain.Models;
 using System;
 using System.Collections.Generic;

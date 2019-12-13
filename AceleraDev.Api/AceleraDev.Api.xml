@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AceleraDev.Api</name>
+    </assembly>
+    <members>
+        <member name="T:AceleraDev.Api.Controllers.AutenticacaoController">
+            <summary>
+            Login do usuário.
+            </summary>
+        </member>
+        <member name="M:AceleraDev.Api.Controllers.AutenticacaoController.#ctor(AceleraDev.Application.Interfaces.IUsuarioAppService,Microsoft.Extensions.Options.IOptions{AceleraDev.CrossCutting.Helpers.AppSettings})">
+            <summary>
+            Login do usuário ctor.
+            </summary>
+            <param name="usuarioAppService"></param>
+            <param name="appSettings"></param>
+        </member>
+        <member name="M:AceleraDev.Api.Controllers.AutenticacaoController.Post(AceleraDev.Application.ViewModels.Autenticacao.LoginViewModel)">
+            <summary>
+            Endpoint para login do usuário.
+            </summary>
+            <param name="loginViewModel"></param>
+            <returns></returns>
+            <response code="200">Retorna o usuário e o token</response>
+            <response code="400">Se ocorrer algum erro na autenticação</response>  
+        </member>
+        <member name="M:AceleraDev.Api.Controllers.ClienteController.GetById(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AceleraDev.Api.Controllers.ClienteController.GetEnderecosCliente(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AceleraDev.Api.Controllers.ClienteController.Post(System.String,AceleraDev.Application.ViewModels.ClienteViewModel)">
+            <summary>
+            
+            </summary>
+            <param name="empresa"></param>
+            <param name="cliente"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -2,6 +2,6 @@
 {
     public class AppSettings
     {
-        public string SecretKeyJWT { get; set; }
+        public string Secret { get; set; }
     }
 }

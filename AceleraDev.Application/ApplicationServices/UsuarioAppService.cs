@@ -1,6 +1,7 @@
 ﻿using AceleraDev.Application.Interfaces;
 using AceleraDev.Application.ViewModels;
-using AceleraDev.Domain.Interfaces.Base;
+using AceleraDev.Application.ViewModels.Seguranca;
+using AceleraDev.Domain.Interfaces.Services;
 using AceleraDev.Domain.Models;
 using AutoMapper;
 using System;
@@ -10,10 +11,10 @@ namespace AceleraDev.Application.ApplicationServices
 {
     public class UsuarioAppService : IUsuarioAppService
     {
-        private readonly IServiceBase<Usuario> _usuarioService;
+        private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
 
-        public UsuarioAppService(IServiceBase<Usuario> usuarioService, IMapper mapper)
+        public UsuarioAppService(IUsuarioService usuarioService, IMapper mapper)
         {
             _usuarioService = usuarioService;
             _mapper = mapper;
@@ -21,18 +22,22 @@ namespace AceleraDev.Application.ApplicationServices
 
         public UsuarioViewModel Add(UsuarioViewModel obj)
         {
-            throw new NotImplementedException();
+            var model = _mapper.Map<Usuario>(obj);
+            model = _usuarioService.Add(model);
+
+            return _mapper.Map<UsuarioViewModel>(model);
         }
 
         public IList<UsuarioViewModel> Find(Func<Usuario, bool> predicate)
         {
-            var models = _usuarioService.Find(predicate);
-            return _mapper.Map<List<UsuarioViewModel>>(models);
+            var model = _usuarioService.Find(predicate);
+            return _mapper.Map<List<UsuarioViewModel>>(model);
         }
 
         public IList<UsuarioViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var model = _usuarioService.GetAll();
+            return _mapper.Map<List<UsuarioViewModel>>(model);
         }
 
         public UsuarioViewModel GetById(Guid id)
@@ -43,12 +48,13 @@ namespace AceleraDev.Application.ApplicationServices
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            _usuarioService.Remove(id);
         }
 
         public void Update(UsuarioViewModel obj)
         {
-            throw new NotImplementedException();
+            var model = _mapper.Map<Usuario>(obj);
+            _usuarioService.Update(model);
         }
     }
 }
