@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="5.0.0-rc4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
